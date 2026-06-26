@@ -98,15 +98,15 @@
           <p class="sub">The big stuff — how you get around, what you eat, how you keep the lights on.</p>
 
           <div class="q">
-            <label for="c-miles">Miles driven per week (as driver or main passenger)</label>
+            <label for="c-miles">Kilometres driven per week (as driver or main passenger)</label>
             <div class="row">
-              <input type="range" id="c-miles" min="0" max="500" value="120" step="10" data-out="c-miles-out" />
-              <output id="c-miles-out">120</output>
+              <input type="range" id="c-miles" min="0" max="800" value="200" step="10" data-out="c-miles-out" />
+              <output id="c-miles-out">200</output>
             </div>
           </div>
 
           <div class="q">
-            <label for="c-flights">Hours flown per year (total, all trips)</label>
+            <label for="c-flights">Hours flown per year (sun holidays, hen dos, the lot)</label>
             <div class="row">
               <input type="range" id="c-flights" min="0" max="80" value="6" data-out="c-flights-out" />
               <output id="c-flights-out">6</output>
@@ -116,7 +116,7 @@
           <div class="q">
             <label for="c-diet">Your usual diet</label>
             <select id="c-diet">
-              <option value="3.3">Meat at most meals</option>
+              <option value="3.3">A fry most mornings, meat most dinners</option>
               <option value="2.5" selected>Mixed — meat a few times a week</option>
               <option value="1.7">Vegetarian</option>
               <option value="1.5">Vegan</option>
@@ -124,10 +124,10 @@
           </div>
 
           <div class="q">
-            <label for="c-power">Monthly electric bill (rough $)</label>
+            <label for="c-power">Monthly electricity bill (rough €)</label>
             <div class="row">
-              <input type="range" id="c-power" min="0" max="400" value="90" step="5" data-out="c-power-out" />
-              <output id="c-power-out">90</output>
+              <input type="range" id="c-power" min="0" max="400" value="150" step="5" data-out="c-power-out" />
+              <output id="c-power-out">150</output>
             </div>
           </div>
         </div>
@@ -138,9 +138,9 @@
           <p class="result-sub">that's about <span data-result="carbon-tons">0</span> tons</p>
 
           <ul class="refs">
-            <li>Same as driving from New York to Los Angeles <span class="ref-num" data-result="carbon-coasttocoast">0</span> times</li>
-            <li>Same as leaving every light in your house on for <span class="ref-num" data-result="carbon-lights">0</span> straight days</li>
-            <li>Same as <span class="ref-num" data-result="carbon-burgers">0</span> cheeseburgers' worth of cooking and farming</li>
+            <li>Same as driving Dublin to Galway and back <span class="ref-num" data-result="carbon-dubgal">0</span> times</li>
+            <li>Same as <span class="ref-num" data-result="carbon-kettles">0</span> boils of the kettle for a cup of tea</li>
+            <li>Same as <span class="ref-num" data-result="carbon-pints">0</span> pints of Guinness brewed and poured</li>
           </ul>
         </aside>
       </div>

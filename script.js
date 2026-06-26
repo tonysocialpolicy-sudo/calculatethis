@@ -58,24 +58,24 @@ function calcPlastic() {
 }
 
 function calcCarbon() {
-  const miles    = val('c-miles') * 52;            // miles/year
+  const km       = val('c-miles') * 52;            // km/year
   const flyHours = val('c-flights');               // hours/year
   const dietT    = Number(document.getElementById('c-diet').value); // tons CO2/yr
-  const bill     = val('c-power');                 // $/month
+  const bill     = val('c-power');                 // €/month
 
   // kg CO2 per year
   const kg =
-    miles * 0.404 +                  // avg US car: 0.404 kg/mi
+    km       * 0.171 +               // avg car: ~0.171 kg CO2/km
     flyHours * 90 +                  // ~90 kg CO2 per flight hour, economy
-    dietT * 1000 +                   // diet, tons -> kg
-    bill * 12 * 4.5;                 // ~4.5 kg CO2 per $ of electric (rough US avg)
+    dietT    * 1000 +                // diet, tons -> kg
+    bill     * 12 * 1.0;             // Irish grid + tariff: ~1 kg CO2 per € of electric
 
   return {
     kg,
     tons: kg / 1000,
-    coastToCoast: kg / 1140,           // ~1140 kg CO2 for a 2,800-mi cross-country drive
-    lightsDays: kg / 7,                // ~7 kg CO2/day to light a whole house 24/7
-    burgers: kg / 3.0                  // ~3 kg CO2 per cheeseburger
+    dubgal:  kg / 72,                // Dublin↔Galway round trip ~420 km × 0.171 ≈ 72 kg
+    kettles: kg / 0.033,             // 1 kettle boil ~0.11 kWh × 0.3 kg CO2/kWh ≈ 0.033 kg
+    pints:   kg / 0.5                // ~0.5 kg CO2 per pint of Guinness (brewing + packaging)
   };
 }
 
@@ -150,9 +150,9 @@ function recalc() {
   // Carbon
   set('carbon-kg', fmt(c.kg));
   set('carbon-tons', fmtDec(c.tons, 1));
-  set('carbon-coasttocoast', fmt(c.coastToCoast));
-  set('carbon-lights', fmt(c.lightsDays));
-  set('carbon-burgers', fmt(c.burgers));
+  set('carbon-dubgal', fmt(c.dubgal));
+  set('carbon-kettles', fmt(c.kettles));
+  set('carbon-pints', fmt(c.pints));
 
   // Fabric
   set('fabric-kg', fmt(f.kg));
