@@ -2,11 +2,12 @@
   --bg: #f6f4ee;
   --ink: #1a1a1a;
   --ink-soft: #5b5b55;
-  --accent: #2d5d3a;
-  --accent-soft: #e2ecdf;
+  --accent: #e63946;          /* SISK red */
+  --accent-deep: #b82a35;     /* darker red for hover/depth */
+  --accent-soft: #fbeaec;     /* pale red wash */
   --card: #ffffff;
   --line: #e7e3d8;
-  --warm: #d97742;
+  --warm: #f4d35e;            /* warm gold — pops on red */
 }
 
 * { box-sizing: border-box; }
@@ -87,7 +88,7 @@ html, body {
   background: var(--accent);
   color: white;
 }
-.tab.is-active .tab-icon { color: #cfe8d3; }
+.tab.is-active .tab-icon { color: #fbeaec; }
 .tab-icon { font-size: 14px; }
 
 /* PANELS */
@@ -230,7 +231,7 @@ select {
 .refs li:last-child { border-bottom: none; }
 .ref-num {
   font-weight: 700;
-  color: #ffd9bd;
+  color: var(--warm);
   font-variant-numeric: tabular-nums;
 }
 
