@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculate This — Your Waste, In Real Terms</title>
+  <meta name="description" content="A simple calculator that turns your plastic, carbon, fabric, and food waste into things you can actually picture." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">calculate this</p>
+      <h1>How much do you actually throw away?</h1>
+      <p class="lede">Answer a few quick questions. We'll turn your year of waste into things you can picture — grocery bags, road trips, a closet full of clothes.</p>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Waste categories">
+    <button class="tab is-active" data-tab="plastic" role="tab" aria-selected="true">
+      <span class="tab-icon">◯</span>
+      <span class="tab-label">Plastic</span>
+    </button>
+    <button class="tab" data-tab="carbon" role="tab" aria-selected="false">
+      <span class="tab-icon">◯</span>
+      <span class="tab-label">Carbon</span>
+    </button>
+    <button class="tab" data-tab="fabric" role="tab" aria-selected="false">
+      <span class="tab-icon">◯</span>
+      <span class="tab-label">Fabric</span>
+    </button>
+    <button class="tab" data-tab="food" role="tab" aria-selected="false">
+      <span class="tab-icon">◯</span>
+      <span class="tab-label">Food</span>
+    </button>
+  </nav>
+
+  <main class="wrap">
+    <!-- PLASTIC -->
+    <section class="panel is-active" id="panel-plastic" data-panel="plastic">
+      <div class="panel-grid">
+        <div class="questions">
+          <h2>Your plastic week</h2>
+          <p class="sub">Rough numbers are fine. Think of a normal week.</p>
+
+          <div class="q">
+            <label for="p-bottles">Plastic water or drink bottles per week</label>
+            <div class="row">
+              <input type="range" id="p-bottles" min="0" max="30" value="4" data-out="p-bottles-out" />
+              <output id="p-bottles-out">4</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="p-bags">Single-use plastic bags per week (grocery, produce, takeout)</label>
+            <div class="row">
+              <input type="range" id="p-bags" min="0" max="40" value="6" data-out="p-bags-out" />
+              <output id="p-bags-out">6</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="p-takeout">Takeout containers / plastic cutlery sets per week</label>
+            <div class="row">
+              <input type="range" id="p-takeout" min="0" max="20" value="3" data-out="p-takeout-out" />
+              <output id="p-takeout-out">3</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="p-orders">Online orders per month (the packaging adds up)</label>
+            <div class="row">
+              <input type="range" id="p-orders" min="0" max="30" value="4" data-out="p-orders-out" />
+              <output id="p-orders-out">4</output>
+            </div>
+          </div>
+        </div>
+
+        <aside class="result" id="result-plastic">
+          <p class="result-label">A year of your plastic</p>
+          <p class="result-big"><span data-result="plastic-kg">0</span> kg</p>
+          <p class="result-sub">that's about <span data-result="plastic-lb">0</span> pounds</p>
+
+          <ul class="refs">
+            <li><span class="ref-num" data-result="plastic-bottles">0</span> plastic bottles lined up — enough to fill a kitchen sink to the brim, again and again</li>
+            <li><span class="ref-num" data-result="plastic-bags">0</span> shopping bags — picture them stuffed in your trunk</li>
+            <li><span class="ref-num" data-result="plastic-trash">0</span> kitchen trash bags packed full</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CARBON -->
+    <section class="panel" id="panel-carbon" data-panel="carbon">
+      <div class="panel-grid">
+        <div class="questions">
+          <h2>Your carbon year</h2>
+          <p class="sub">The big stuff — how you get around, what you eat, how you keep the lights on.</p>
+
+          <div class="q">
+            <label for="c-miles">Kilometres driven per week (as driver or main passenger)</label>
+            <div class="row">
+              <input type="range" id="c-miles" min="0" max="800" value="200" step="10" data-out="c-miles-out" />
+              <output id="c-miles-out">200</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="c-flights">Hours flown per year (sun holidays, hen dos, the lot)</label>
+            <div class="row">
+              <input type="range" id="c-flights" min="0" max="80" value="6" data-out="c-flights-out" />
+              <output id="c-flights-out">6</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="c-diet">Your usual diet</label>
+            <select id="c-diet">
+              <option value="3.3">A fry most mornings, meat most dinners</option>
+              <option value="2.5" selected>Mixed — meat a few times a week</option>
+              <option value="1.7">Vegetarian</option>
+              <option value="1.5">Vegan</option>
+            </select>
+          </div>
+
+          <div class="q">
+            <label for="c-power">Monthly electricity bill (rough €)</label>
+            <div class="row">
+              <input type="range" id="c-power" min="0" max="400" value="150" step="5" data-out="c-power-out" />
+              <output id="c-power-out">150</output>
+            </div>
+          </div>
+        </div>
+
+        <aside class="result" id="result-carbon">
+          <p class="result-label">A year of your carbon</p>
+          <p class="result-big"><span data-result="carbon-kg">0</span> kg CO₂</p>
+          <p class="result-sub">that's about <span data-result="carbon-tons">0</span> tons</p>
+
+          <ul class="refs">
+            <li>Same as driving Dublin to Galway and back <span class="ref-num" data-result="carbon-dubgal">0</span> times</li>
+            <li>Same as <span class="ref-num" data-result="carbon-kettles">0</span> boils of the kettle for a cup of tea</li>
+            <li>Same as <span class="ref-num" data-result="carbon-pints">0</span> pints of Guinness brewed and poured</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FABRIC -->
+    <section class="panel" id="panel-fabric" data-panel="fabric">
+      <div class="panel-grid">
+        <div class="questions">
+          <h2>Your fabric year</h2>
+          <p class="sub">Clothes you buy and clothes you toss — both count.</p>
+
+          <div class="q">
+            <label for="f-new">New clothing items bought per month</label>
+            <div class="row">
+              <input type="range" id="f-new" min="0" max="30" value="4" data-out="f-new-out" />
+              <output id="f-new-out">4</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="f-fast">Of those, how many are fast fashion (Shein, H&amp;M, Zara, etc.)?</label>
+            <div class="row">
+              <input type="range" id="f-fast" min="0" max="30" value="2" data-out="f-fast-out" />
+              <output id="f-fast-out">2</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="f-tossed">Clothing items thrown out or donated per year</label>
+            <div class="row">
+              <input type="range" id="f-tossed" min="0" max="100" value="20" data-out="f-tossed-out" />
+              <output id="f-tossed-out">20</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="f-laundry">Loads of laundry per week</label>
+            <div class="row">
+              <input type="range" id="f-laundry" min="0" max="20" value="3" data-out="f-laundry-out" />
+              <output id="f-laundry-out">3</output>
+            </div>
+          </div>
+        </div>
+
+        <aside class="result" id="result-fabric">
+          <p class="result-label">A year of your fabric</p>
+          <p class="result-big"><span data-result="fabric-kg">0</span> kg</p>
+          <p class="result-sub">about <span data-result="fabric-items">0</span> items in and out of your closet</p>
+
+          <ul class="refs">
+            <li><span class="ref-num" data-result="fabric-tshirts">0</span> t-shirts stacked on your bed</li>
+            <li><span class="ref-num" data-result="fabric-baskets">0</span> full laundry baskets</li>
+            <li><span class="ref-num" data-result="fabric-showers">0</span> showers' worth of water used to make it all (yes, really)</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FOOD -->
+    <section class="panel" id="panel-food" data-panel="food">
+      <div class="panel-grid">
+        <div class="questions">
+          <h2>Your food year</h2>
+          <p class="sub">The leftovers that went bad, the apple that got soft, the loaf that grew fuzzy.</p>
+
+          <div class="q">
+            <label for="d-leftovers">Meals' worth of leftovers tossed per week</label>
+            <div class="row">
+              <input type="range" id="d-leftovers" min="0" max="20" value="3" data-out="d-leftovers-out" />
+              <output id="d-leftovers-out">3</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="d-produce">Pieces of fruit or veg gone bad per week</label>
+            <div class="row">
+              <input type="range" id="d-produce" min="0" max="20" value="4" data-out="d-produce-out" />
+              <output id="d-produce-out">4</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="d-bread">Bread / bakery items tossed per month</label>
+            <div class="row">
+              <input type="range" id="d-bread" min="0" max="15" value="2" data-out="d-bread-out" />
+              <output id="d-bread-out">2</output>
+            </div>
+          </div>
+
+          <div class="q">
+            <label for="d-takeout">Takeout / restaurant meals not finished per week</label>
+            <div class="row">
+              <input type="range" id="d-takeout" min="0" max="14" value="2" data-out="d-takeout-out" />
+              <output id="d-takeout-out">2</output>
+            </div>
+          </div>
+        </div>
+
+        <aside class="result" id="result-food">
+          <p class="result-label">A year of your food waste</p>
+          <p class="result-big"><span data-result="food-kg">0</span> kg</p>
+          <p class="result-sub">about <span data-result="food-lb">0</span> pounds in the trash</p>
+
+          <ul class="refs">
+            <li><span class="ref-num" data-result="food-meals">0</span> full meals you paid for and didn't eat</li>
+            <li><span class="ref-num" data-result="food-grocery">0</span> full grocery bags walked straight to the bin</li>
+            <li>About <span class="ref-num" data-result="food-dollars">$0</span> at the register — money tossed with the scraps</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="total">
+      <h2>Your year, all in</h2>
+      <p class="total-big"><span id="total-kg">0</span> kg</p>
+      <p class="total-sub">That's about <span id="total-elephants">0</span> grown elephants on the scale — your share of a single year.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Estimates based on EPA, UN FAO, and IEA averages. Built to make the invisible visible.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
