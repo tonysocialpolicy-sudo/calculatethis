@@ -63,12 +63,12 @@ function calcCarbon() {
   const dietT    = Number(document.getElementById('c-diet').value); // tons CO2/yr
   const bill     = val('c-power');                 // €/month
 
-  // kg CO2 per year
+  // kg CO2 per year — Irish/European data
   const kg =
-    km       * 0.171 +               // avg car: ~0.171 kg CO2/km
+    km       * 0.171 +               // EEA Irish fleet avg: ~0.171 kg CO2/km
     flyHours * 90 +                  // ~90 kg CO2 per flight hour, economy
-    dietT    * 1000 +                // diet, tons -> kg
-    bill     * 12 * 1.0;             // Irish grid + tariff: ~1 kg CO2 per € of electric
+    dietT    * 1000 +                // Teagasc diet bands, tons -> kg
+    bill     * 12 * 0.7;             // SEAI: ~290 g/kWh ÷ ~€0.43/kWh ≈ 0.7 kg CO2 per €
 
   return {
     kg,
@@ -119,8 +119,8 @@ function calcFood() {
   return {
     kg,
     meals: leftovers + takeout,
-    grocery: kg / 5,            // a full grocery bag ≈ 5 kg
-    dollars: Math.round(kg * 4) // ~$4 per kg of food, average grocery cost
+    grocery: kg / 5,              // a full grocery bag ≈ 5 kg
+    dollars: Math.round(kg * 4.5) // Bord Bia / CSO: ~€4.50 per kg of typical groceries
   };
 }
 
@@ -166,7 +166,7 @@ function recalc() {
   set('food-lb', fmt(d.kg * 2.205));
   set('food-meals', fmt(d.meals));
   set('food-grocery', fmt(d.grocery));
-  set('food-dollars', '$' + fmt(d.dollars));
+  set('food-dollars', '€' + fmt(d.dollars));
 
   // Total — carbon dwarfs the others by weight, so we show the trash-side total
   // (plastic + fabric + food) plus carbon separately would be misleading.
