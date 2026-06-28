@@ -127,7 +127,7 @@ function calcFood() {
 // ---- Render ----
 function fmt(n, digits = 0) {
   if (!isFinite(n) || n < 0) n = 0;
-  return Math.round(n).toLocaleString('en-US');
+  return Math.round(n).toLocaleString('en-IE');
 }
 function fmtDec(n, digits = 1) {
   if (!isFinite(n) || n < 0) n = 0;
@@ -142,7 +142,7 @@ function recalc() {
 
   // Plastic
   set('plastic-kg', fmt(p.kg));
-  set('plastic-lb', fmt(p.kg * 2.205));
+  set('plastic-stone', fmtDec(p.kg / 6.35, 1));
   set('plastic-bottles', fmt(p.bottles));
   set('plastic-bags', fmt(p.bags));
   set('plastic-trash', fmt(p.trashBags));
@@ -163,7 +163,7 @@ function recalc() {
 
   // Food
   set('food-kg', fmt(d.kg));
-  set('food-lb', fmt(d.kg * 2.205));
+  set('food-stone', fmtDec(d.kg / 6.35, 1));
   set('food-meals', fmt(d.meals));
   set('food-grocery', fmt(d.grocery));
   set('food-dollars', '€' + fmt(d.dollars));
