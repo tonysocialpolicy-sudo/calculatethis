@@ -294,11 +294,10 @@ function renderCountryBars() {
 }
 
 // ---- Where YOU land (personal vs countries) ----
-// A person's fair-share carbon budget to stay within planetary limits is
-// roughly 2 tonnes CO2 a year. We use that as the "one Earth" line.
-const CARBON_BUDGET = 2.0;
-const CARBON_REFS = ['United States', 'Australia', 'Ireland',
-                     'United Kingdom', 'China', 'World average', 'India'];
+// A person's fair-share carbon budget to stay within planetary limits.
+// 1.7 t CO2/yr is the IPCC 1.5°C-aligned per-capita target for ~2030.
+// We use it as the "one Earth" line.
+const CARBON_BUDGET = 1.7;
 
 function carbonOvershootDay(tonnes) {
   return Math.round(365 * CARBON_BUDGET / tonnes);
@@ -328,7 +327,6 @@ function renderYouVsWorld(userTons, totalKg) {
   }
 
   const rows = COUNTRIES
-    .filter(c => CARBON_REFS.includes(c.name))
     .map(c => ({ name: c.name, flag: c.flag, co2: c.co2, isYou: false }));
   rows.push({ name: 'You', flag: '🫵', co2: userTons, isYou: true });
   rows.sort((a, b) => a.co2 - b.co2); // lightest (latest overshoot) first
