@@ -183,5 +183,112 @@ function set(key, value) {
   });
 }
 
+// ---- Country Overshoot Day ----
+// Ecological footprint per person, in global hectares (gha).
+// Source: Global Footprint Network National Footprint Accounts (recent,
+// rounded). World biocapacity is ~1.5 gha per person — a country's fair share.
+const WORLD_BIOCAPACITY = 1.5;
+
+// selected: shown by default in the comparison
+const COUNTRIES = [
+  { name: 'Qatar',        flag: '🇶🇦', footprint: 14.3, selected: false },
+  { name: 'Luxembourg',   flag: '🇱🇺', footprint: 12.9, selected: false },
+  { name: 'United States',flag: '🇺🇸', footprint: 8.1,  selected: true  },
+  { name: 'Canada',       flag: '🇨🇦', footprint: 8.1,  selected: false },
+  { name: 'Australia',    flag: '🇦🇺', footprint: 6.9,  selected: true  },
+  { name: 'South Korea',  flag: '🇰🇷', footprint: 5.9,  selected: false },
+  { name: 'Russia',       flag: '🇷🇺', footprint: 5.2,  selected: false },
+  { name: 'Ireland',      flag: '🇮🇪', footprint: 4.9,  selected: true  },
+  { name: 'Germany',      flag: '🇩🇪', footprint: 4.7,  selected: false },
+  { name: 'Japan',        flag: '🇯🇵', footprint: 4.6,  selected: false },
+  { name: 'France',       flag: '🇫🇷', footprint: 4.4,  selected: false },
+  { name: 'United Kingdom',flag:'🇬🇧', footprint: 4.2,  selected: true  },
+  { name: 'Italy',        flag: '🇮🇹', footprint: 4.2,  selected: false },
+  { name: 'Spain',        flag: '🇪🇸', footprint: 3.9,  selected: false },
+  { name: 'China',        flag: '🇨🇳', footprint: 3.8,  selected: true  },
+  { name: 'Brazil',       flag: '🇧🇷', footprint: 2.8,  selected: false },
+  { name: 'World average',flag: '🌍', footprint: 2.6,  selected: true  },
+  { name: 'Mexico',       flag: '🇲🇽', footprint: 2.6,  selected: false },
+  { name: 'Indonesia',    flag: '🇮🇩', footprint: 1.7,  selected: false },
+  { name: 'India',        flag: '🇮🇳', footprint: 1.2,  selected: true  },
+  { name: 'Nigeria',      flag: '🇳🇬', footprint: 1.0,  selected: false },
+];
+
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+// Number of Earths needed if everyone lived like this country.
+function earthsFor(c) { return c.footprint / WORLD_BIOCAPACITY; }
+
+// Day of year (1-based) the country crosses its share. Can exceed 365.
+function overshootDayOfYear(c) {
+  return Math.round(365 * WORLD_BIOCAPACITY / c.footprint);
+}
+
+// Turn a 1-based day of year into a readable date, using a non-leap year.
+function dayToDate(day) {
+  const d = new Date(2025, 0, 1);
+  d.setDate(day);
+  return `${MONTHS[d.getMonth()]} ${d.getDate()}`;
+}
+
+function buildCountryPicker() {
+  const picker = document.getElementById('country-picker');
+  if (!picker) return;
+  picker.innerHTML = '';
+  COUNTRIES.forEach((c, i) => {
+    const id = `cc-${i}`;
+    const label = document.createElement('label');
+    label.className = 'country-chip';
+    label.innerHTML =
+      `<input type="checkbox" id="${id}" ${c.selected ? 'checked' : ''} />` +
+      `<span class="chip-flag">${c.flag}</span>` +
+      `<span class="chip-name">${c.name}</span>`;
+    label.querySelector('input').addEventListener('change', e => {
+      c.selected = e.target.checked;
+      renderCountryBars();
+    });
+    picker.appendChild(label);
+  });
+}
+
+function renderCountryBars() {
+  const wrap = document.getElementById('country-bars');
+  if (!wrap) return;
+
+  const chosen = COUNTRIES
+    .filter(c => c.selected)
+    .sort((a, b) => a.footprint - b.footprint); // latest overshoot first (lightest)
+
+  if (!chosen.length) {
+    wrap.innerHTML = '<p class="country-empty">Tick a country above to compare.</p>';
+    return;
+  }
+
+  wrap.innerHTML = '';
+  chosen.forEach(c => {
+    const day = overshootDayOfYear(c);
+    const overshoots = day <= 365;
+    const pct = Math.min(100, (day / 365) * 100);
+    const earths = earthsFor(c);
+    const dateText = overshoots ? dayToDate(day) : 'Never — lives within its share';
+
+    const row = document.createElement('div');
+    row.className = 'country-row' + (overshoots ? '' : ' is-safe');
+    row.innerHTML =
+      `<div class="country-name"><span class="c-flag">${c.flag}</span>${c.name}</div>` +
+      `<div class="country-track">` +
+        `<div class="country-fill" style="width:${pct}%"></div>` +
+        (overshoots ? `<div class="country-mark" style="left:${pct}%"></div>` : '') +
+      `</div>` +
+      `<div class="country-date">${dateText}` +
+        `<span class="country-earths">${earths.toFixed(1)} Earths</span>` +
+      `</div>`;
+    wrap.appendChild(row);
+  });
+}
+
+buildCountryPicker();
+renderCountryBars();
+
 // initial render
 recalc();
