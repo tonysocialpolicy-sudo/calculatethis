@@ -33,6 +33,10 @@
       <span class="tab-icon">◯</span>
       <span class="tab-label">Food</span>
     </button>
+    <button class="tab" data-tab="countries" role="tab" aria-selected="false">
+      <span class="tab-icon">◯</span>
+      <span class="tab-label">Countries</span>
+    </button>
   </nav>
 
   <main class="wrap">
@@ -252,6 +256,38 @@
           </ul>
         </aside>
       </div>
+    </section>
+
+    <!-- COUNTRIES -->
+    <section class="panel" id="panel-countries" data-panel="countries">
+      <div class="countries-head">
+        <h2>Country Overshoot Day</h2>
+        <p class="sub">
+          If everyone on Earth lived like a given country, this is the date we'd
+          use up a whole year's worth of what the planet can regrow. The earlier
+          the date, the heavier the footprint. Tick countries to compare them.
+        </p>
+      </div>
+
+      <div class="you-card">
+        <h3 class="you-title">Where <span>you</span> land</h3>
+        <p class="you-lead" id="you-lead"></p>
+        <div class="country-bars you-bars" id="you-bars"></div>
+        <p class="you-secondary" id="you-secondary"></p>
+      </div>
+
+      <h3 class="compare-heading">Compare countries</h3>
+      <div class="country-picker" id="country-picker" aria-label="Choose countries to compare"></div>
+
+      <div class="country-bars" id="country-bars"></div>
+
+      <p class="country-note">
+        Overshoot day = 365 × (world biocapacity per person ÷ that country's
+        ecological footprint per person). Footprint figures are per-capita
+        estimates based on Global Footprint Network National Footprint Accounts;
+        world biocapacity is taken as ~1.5 global hectares per person. Countries
+        living within that share never overshoot.
+      </p>
     </section>
 
     <section class="total">
