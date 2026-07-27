@@ -98,7 +98,9 @@ function calcFabric() {
     items,
     tshirts: kg / 0.2,                    // 1 t-shirt ≈ 0.2 kg
     baskets: kg / 4,                      // a packed basket ≈ 4 kg of clothes
-    showers: (newItems * 2700 + fast * 500) / 65,  // 1 t-shirt = 2700L, 1 shower ≈ 65L
+    // Water to make the clothes plus water to wash them all year
+    // (1 t-shirt ≈ 2700L to make; 1 wash load ≈ 50L; 1 shower ≈ 65L)
+    showers: (newItems * 2700 + fast * 500 + laundry * 50) / 65,
     laundry
   };
 }
